@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<script
+			type="text/javascript"
+			defer
+			src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"
+		></script>
+		<script type="text/babel" data-presets="es2017,stage-3">
+			(() => {
+				const timer = ms => logName => {
+					return new Promise(resolve => {
+						setTimeout(
+							text => {
+								console.log(text);
+								resolve();
+							},
+							ms,
+							`${logName} called - after ${ms}ms`
+						);
+					});
+				};
+
+				const log1 = timer(2500);
+				const log2 = timer(1500);
+				const log3 = timer(500);
+
+				(async () => {
+					await log1("log1");
+					await log2("log2");
+					await log3("log3");
+				})();
+			})();
+		</script>
+	</head>
+	<body>
+		<main>
+			<h2>Excercise 2: Asynchronous Programming</h2>
+			<blockquote>
+				The following 5 lines must be included in your solution unmodified.
+				<pre>
+const timer = ms =&gt; logName =&gt; setTimeout(console.log, ms, `${logName} called`);</pre
+				>
+				<pre>
+const log1 = timer(2500);
+const log2 = timer(1500);
+const log3 = timer(500);
+      </pre
+				>
+				<p>
+					Use the 3 functions above to implement a solution where the console
+					outputs each function in the order that they're listed above.
+				</p>
+			</blockquote>
+			<h3>Rules for Exercise 2</h3>
+			<ol>
+				<li>
+					You may modify the timer function as long as you maintain the given
+					order of arguments and pass the ms argument to setTimeout.
+				</li>
+				<li>You may not modify how the 3 log functions above are called.</li>
+				<li>
+					You must call the log functions in the order that they're listed
+					above. i.e.: `log1` must be called before `log2`, which must be called
+					before `log3`.
+				</li>
+				<li>You may not import any libraries to assist with your solution.</li>
+				<li>
+					You may use any ECMAScript transpiler so that you can write your
+					solution in modern ECMAScript.
+				</li>
+			</ol>
+		</main>
+	</body>
+</html>

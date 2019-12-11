@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<script defer type="text/javascript">
+			(() => {
+				window.addEventListener('DOMContentLoaded', () => {
+					const levels = {
+						debug: 'green',
+						info: 'gray',
+						warn: 'orange',
+						error: 'red',
+						whatever: 'blue',
+					};
+					const targetDiv = 'result';
+
+					// curried fn for producting the logger
+					const logger = (targetId, level, color) => msg => {
+						const elem = document.createElement('div');
+						elem.style.color = color;
+						const text = document.createTextNode(`[${level}] ${msg}`);
+						elem.appendChild(text);
+						const target = document.querySelector(`#${targetId}`);
+						target.appendChild(elem);
+					};
+
+					// instantiate a logger object
+					const loggers = {};
+					Object.keys(levels).forEach(key => {
+						loggers[key] = logger(targetDiv, key, levels[key]);
+					});
+
+					// output
+					Object.keys(loggers).forEach(key => {
+						loggers[key](`This is a message from the ${key} type`);
+					});
+				});
+			})();
+		</script>
+	</head>
+	<body>
+		<div id="result"></div>
+		<main>
+			<h2>Exercise 1: Reusable Functions</h2>
+			<div>
+				The object of this exercise is to write a custom JavaScript logger which
+				displays log messages in the DOM. The only HTML needed will be a div
+				with an ID attribute of "result" - where the logger will append its
+				output.
+			</div>
+			<h3>Use the HTML below for your Log Output</h3>
+			<pre>
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;div id="result"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+      </pre>
+			<p>Write a reusable function that has the following characteristics:</p>
+			<ol>
+				<li>
+					The function accepts any log level defined at runtime (e.g. debug,
+					warn, etc.) and accepts a corresponding color to apply to the log
+					message (e.g. gray, orange, red, etc.) as arguments.
+				</li>
+				<li>
+					The function should return a new function that accepts a message as
+					it’s argument and appends it to the DOM element show above with the ID
+					attribute of "result". Use this to create loggers for debug, warn, and
+					info levels.
+				</li>
+				<li>
+					Each appended log message should be prepended by the name of its
+					associated level and displayed in the corresponding color.
+				</li>
+			</ol>
+			<h3>Rules for Exercise 1</h3>
+			<ol>
+				<li>You may not hard code the log levels</li>
+				<li>You may not hard code the colors</li>
+				<li>
+					You may not hard code any DOM element information particularly the id
+					of the DOM element shown above.
+				</li>
+				<li>You may not use any stylesheets</li>
+				<li>You may not import any libraries to assist with your solution.</li>
+				<li>
+					You may use any ECMAScript transpiler so that you can write your
+					solution in modern ECMAScript.
+				</li>
+			</ol>
+		</main>
+	</body>
+</html>
