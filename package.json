@@ -1,5 +1,5 @@
 {
-	"name": "@wsrast/cisco",
+	"name": "@wsrast/challenges",
 	"version": "1.0.0",
 	"description": "Cisco coding challenges",
 	"main": "index.js",
