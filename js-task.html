@@ -3,13 +3,14 @@
 		<script defer type="text/javascript">
 			(() => {
 				window.addEventListener('DOMContentLoaded', () => {
-					const levels = {
-						debug: 'green',
-						info: 'gray',
-						warn: 'orange',
-						error: 'red',
-						whatever: 'blue',
-					};
+					// create a dictionary of log types to try
+					const levels = new Map([
+						['debug', 'green'],
+						['info', 'gray'],
+						['warn', 'orange'],
+						['error', 'red'],
+						['whatever', 'blue'],
+					]);
 					const targetDiv = 'result';
 
 					// curried fn for producting the logger
@@ -22,16 +23,14 @@
 						target.appendChild(elem);
 					};
 
-					// instantiate a logger object
-					const loggers = {};
-					Object.keys(levels).forEach(key => {
-						loggers[key] = logger(targetDiv, key, levels[key]);
-					});
-
 					// output
-					Object.keys(loggers).forEach(key => {
-						loggers[key](`This is a message from the ${key} type`);
-					});
+					for (const [key, val] of levels.entries()) {
+						logger(
+							targetDiv,
+							key,
+							val
+						)(`This is a message from the ${key} type`);
+					}
 				});
 			})();
 		</script>
